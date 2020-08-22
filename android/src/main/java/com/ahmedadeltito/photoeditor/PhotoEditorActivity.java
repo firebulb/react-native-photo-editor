@@ -131,7 +131,7 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
 
 
         Typeface newFont = getFontFromRes(R.raw.eventtusicons);
-        Typeface fontAwesome = getFontFromRes(R.raw.font_awesome_solid);
+        Typeface icoMoon = getFontFromRes(R.raw.icons);
 
         emojiFont = getFontFromRes(R.raw.emojioneandroid);
 
@@ -162,20 +162,20 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
         bottomShadowRelativeLayout = (RelativeLayout) findViewById(R.id.bottom_parent_rl);
 
         ViewPager pager = (ViewPager) findViewById(R.id.image_emoji_view_pager);
-        PageIndicator indicator = (PageIndicator) findViewById(R.id.image_emoji_indicator);
+        //PageIndicator indicator = (PageIndicator) findViewById(R.id.image_emoji_indicator);
 
         photoEditImageView.setImageBitmap(rotatedBitmap);
 
-        closeTextView.setTypeface(newFont);
-        addTextView.setTypeface(newFont);
-        addPencil.setTypeface(newFont);
-        addImageEmojiTextView.setTypeface(newFont);
-        addCropTextView.setTypeface(fontAwesome);
-        saveTextView.setTypeface(newFont);
-        undoTextView.setTypeface(newFont);
-        clearAllTextView.setTypeface(newFont);
-        goToNextTextView.setTypeface(newFont);
-        deleteTextView.setTypeface(newFont);
+        closeTextView.setTypeface(icoMoon);
+        addTextView.setTypeface(icoMoon);
+        addPencil.setTypeface(icoMoon);
+        addImageEmojiTextView.setTypeface(icoMoon);
+        addCropTextView.setTypeface(icoMoon);
+        saveTextView.setTypeface(icoMoon);
+        undoTextView.setTypeface(icoMoon);
+        clearAllTextView.setTypeface(icoMoon);
+        goToNextTextView.setTypeface(icoMoon);
+        deleteTextView.setTypeface(icoMoon);
 
         final List<Fragment> fragmentsList = new ArrayList<>();
 
@@ -196,7 +196,8 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
         PreviewSlidePagerAdapter adapter = new PreviewSlidePagerAdapter(getSupportFragmentManager(), fragmentsList);
         pager.setAdapter(adapter);
         pager.setOffscreenPageLimit(5);
-        indicator.setViewPager(pager);
+        pager.beginFakeDrag();
+        //indicator.setViewPager(pager);
 
         photoEditorSDK = new PhotoEditorSDK.PhotoEditorSDKBuilder(PhotoEditorActivity.this)
                 .parentView(parentImageRelativeLayout) // add parent image view
@@ -206,26 +207,26 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
                 .buildPhotoEditorSDK(); // build photo editor sdk
         photoEditorSDK.setOnPhotoEditorSDKListener(this);
 
-        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                if (position == 0)
-                    mLayout.setScrollableView(((ImageFragment) fragmentsList.get(position)).imageRecyclerView);
-                else if (position == 1)
-                    mLayout.setScrollableView(((EmojiFragment) fragmentsList.get(position)).emojiRecyclerView);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+//        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//                if (position == 0)
+//                    mLayout.setScrollableView(((ImageFragment) fragmentsList.get(position)).imageRecyclerView);
+//                else if (position == 1)
+//                    mLayout.setScrollableView(((EmojiFragment) fragmentsList.get(position)).emojiRecyclerView);
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        });
 
         closeTextView.setOnClickListener(this);
         addImageEmojiTextView.setOnClickListener(this);
